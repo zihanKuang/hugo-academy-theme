@@ -5,7 +5,7 @@
   Notes: Automatically injects `uuid` as a parameter.
 */}}
 
-{{- $ctx := partial "resolve-tenant-id.html" . -}}
+{{- $ctx := partial "resolve-tenant.html" . -}}
 {{- $uuid := $ctx.uuid -}}
 
 {{- $name := .Get "name" -}}
