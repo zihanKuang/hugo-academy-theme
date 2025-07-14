@@ -4,18 +4,27 @@
   Usage: {{< useshortcode "banner" title="Hello" content="Welcome!" >}}
   Notes: Automatically injects `uuid` as a parameter.
 */}}
-{{- $ctx := partial "resolve-tenant.html" . -}}
+
+{{- $ctx := partial "resolve-tenant-id.html" . -}}
 {{- $uuid := $ctx.uuid -}}
 
-{{- $name := .Get 0 -}}
-{{- $params := dict -}}
+{{- $name := .Get "name" -}}
+{{- $params := .Params -}}
 
-{{- range $k, $v := .Params -}}
-  {{- if ne $k "0" -}}
-    {{- $params = merge $params (dict $k $v) -}}
+{{- $shortcode := printf "%s/%s" $uuid $name -}}
+
+{{- if gt (len $params) 1 }}
+  {{- $paramMap := dict -}}
+  {{- range $k, $v := $params -}}
+    {{- if ne $k "name" -}}
+      {{- $paramMap = merge $paramMap (dict $k $v) -}}
+    {{- end -}}
   {{- end -}}
+
+  {{- .Page.RenderShortcode (dict "name" $shortcode "params" $paramMap) -}}
+
+{{- else -}}
+
+  {{- .Page.RenderShortcode (dict "name" $shortcode) -}}
+
 {{- end -}}
-
-{{- $params = merge $params (dict "uuid" $uuid) -}}
-
-{{- partial (printf "shortcodes/uuid/%s.html" $name) $params -}}
