@@ -1,0 +1,95 @@
+{{ $data := "" }}
+
+{{ $p := "static/data/csv/keys-backup.csv" }}
+{{ $excludedColumns := slice "Category" "Keychain ID" "Key ID" "Inserted" "Local Provider" }} <!-- Add the names of the columns to exclude -->
+
+{{ if os.FileExists $p }}
+  {{ $opts := dict "delimiter" "," }}
+  {{ $data = (os.ReadFile $p | transform.Unmarshal $opts) }}
+{{ else }}
+  {{ errorf "Unable to get resource %q" $p }}
+{{ end }}
+
+{{ if $data }}
+  {{ $uniqueCategories := slice }}
+  {{ $header := index $data 1 }}
+  {{ $headerMap := dict }}
+
+  {{ range $i, $col := $header }}
+    {{ $headerMap = merge $headerMap (dict $col $i) }}
+  {{ end }}
+
+  {{ range $i, $row := $data }}
+    {{ if gt $i 1 }}
+      {{ $category := trim (index $row 0) " " }}
+      {{ if not (in $uniqueCategories $category) }}
+        {{ $uniqueCategories = $uniqueCategories | append $category }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ range $index, $category := $uniqueCategories }}
+    <h2>{{ $category }} Permissions</h2>
+    <table class="csvtable td-initial">
+      <thead>
+        <tr>
+          {{ range $i, $col := $header }}
+            {{ if not (in $excludedColumns $col) }}
+              {{ if eq $col "Function" }}
+                <th>Permission</th>
+              {{ else if eq $col "Feature" }}
+                <th>Description</th>
+              {{ else }}
+                {{ $sectionName := $col | lower }}
+                {{ $urlPath := "roles" }}
+                {{ if hasPrefix $sectionName "workspace" }}
+                  {{ $urlPath = "roles/workspace-roles" }}
+                {{ else if hasPrefix $sectionName "team" }}
+                  {{ $urlPath = "roles/team-roles" }}
+                {{ else if hasPrefix $sectionName "org" }}
+                  {{ $urlPath = "roles/organization-roles" }}
+                {{ else if hasPrefix $sectionName "provider" }}
+                  {{ $urlPath = "roles/#provider-admin-role" }}
+                {{ else if hasPrefix $sectionName "user" }}
+                  {{ $urlPath = "roles/user-role" }}
+                {{ else }}
+                  {{ $urlPath = print "roles/" }}
+                {{ end }}
+                <th><a href="/cloud/security/{{ $urlPath }}">{{ $col }}</a></th>
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        </tr>
+      </thead>
+      <tbody>
+        {{ range $i, $row := $data }}
+          {{ if and (gt $i 1) (eq (trim (index $row 0) " ") $category) }}
+            <tr>
+              {{ range $j, $cell := $row }}
+                {{ $col := index $header $j }}
+                {{ if not (in $excludedColumns $col) }}
+                  <td>
+                    {{ if and (gt $j 2) (lt $j 10) }}
+                      {{ if eq $cell "X" }}
+                        ✅
+                      {{ else if eq $cell "X*" }}
+                        ✅ *
+                      {{ else }}
+                        ❌
+                      {{ end }}
+                    {{ else }}
+                      {{ $cell }}
+                    {{ end }}
+                  </td>
+                {{ end }}
+              {{ end }}
+            </tr>
+          {{ end }}
+        {{ end }}
+      </tbody>
+    </table>
+  {{ end }}
+
+{{ else }}
+  <p>No data available.</p>
+{{ end }}

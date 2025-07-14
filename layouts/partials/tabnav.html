@@ -1,0 +1,71 @@
+
+{{/* layouts/partials/tabnav.html */}}
+
+{{/* Define tabs dynamically here or pass them from the parent template */}}
+{{ $tabs := slice
+  (dict "name" "Overview" "icon" "🏛️" "url" "/")
+  (dict "name" "Learning Paths" "icon" "🎓" "url" "/learning-paths/")
+  (dict "name" "Challenges" "icon" "⛰️" "url" "/challenges/")
+}}
+
+<nav class="tab-nav">
+  <p class="tab-title">
+  </p>
+  <ul class="tab-list">
+    {{ range $tabs }}
+      {{ $isActive := eq (print .url) (trim $.Page.RelPermalink "/") | or (strings.HasPrefix $.Page.RelPermalink .url) }}
+      <li class="tab-item {{ if $isActive }}active{{ end }}">
+        <a href="{{ .url }}">
+          <span class="icon">{{ .icon }}</span>
+          <span class="label">{{ .name }}</span>
+        </a>
+      </li>
+    {{ end }}
+  </ul>
+</nav>
+
+<style>
+
+.tab-title {
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0;
+}
+
+.tab-nav {
+  background-color: #2b4a56;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: inset 0 -2px 0 #43c9b0;
+}
+.tab-list {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tab-item a {
+  text-decoration: none;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 4px solid transparent;
+}
+.tab-item.active a {
+  background-color: #fff;
+  color: #2b4a56;
+  border-bottom: 4px solid #43c9b0;
+  border-radius: 6px 6px 0 0;
+}
+.icon {
+  font-size: 2.5rem;
+}
+.label {
+  font-size: 0.8rem;
+}
+</style>

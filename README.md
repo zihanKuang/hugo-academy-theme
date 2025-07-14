@@ -1,44 +1,187 @@
-# layer5-repo-template
-This repository is used as the boilerplate for consistency across all Layer5 repos.
+# Docsy Example
 
-<div>&nbsp;</div>
+[Docsy][] is a [Hugo theme module][] for technical documentation sites, providing easy
+site navigation, structure, and more. This **Docsy Example Project** uses the Docsy
+theme component as a hugo module and provides a skeleton documentation structure for you to use.
+You can clone/copy this project and edit it with your own content, or use it as an example.
 
-## Join the Layer5 community!
+In this project, the Docsy theme is pulled in as a Hugo module, together with
+its dependencies:
 
-<a name="contributing"></a><a name="community"></a>
-Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://docs.google.com/document/d/17OPtDE_rdnPQxmk2Kauhm3GwXF1R5dZ3Cj8qZLKdo5E/edit">Layer5 Community Welcome Guide</a> for a tour of resources available to you and jump into our <a href="http://slack.layer5.io">Slack</a>!
+```console
+$ hugo mod graph
+...
+```
 
-<p style="clear:both;">
-<a href ="https://layer5.io/community/meshmates"><img alt="MeshMates" src=".github/readme/images/layer5-community-sign.png" style="margin-right:10px; margin-bottom:15px;" width="28%" align="left"/></a>
-<h3>Find your MeshMate</h3>
+For Docsy documentation, see [Docsy user guide][].
 
-<p>MeshMates are experienced Layer5 community members, who will help you learn your way around, discover live projects and expand your community network. 
-Become a <b>Meshtee</b> today!</p>
+This Docsy Example Project is hosted on [Netlify][] at [example.docsy.dev][].
+You can view deploy logs from the [deploy section of the project's Netlify
+dashboard][deploys], or this [alternate dashboard][].
 
-Find out more on the <a href="https://layer5.io/community">Layer5 community</a>. <br />
-<br /><br /><br /><br />
-</p>
+This is not an officially supported Google product. This project is currently maintained.
 
-<div>&nbsp;</div>
+## Using the Docsy Example Project as a template
 
-<a href="https://slack.meshery.io">
+A simple way to get started is to use this project as a template, which gives you a site project that is set up and ready to use. To do this:
 
-<picture align="right">
-  <source media="(prefers-color-scheme: dark)" srcset=".github/readme/images//slack-dark-128.png"  width="110px" align="right" style="margin-left:10px;margin-top:10px;">
-  <source media="(prefers-color-scheme: light)" srcset=".github/readme/images//slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:5px;">
-  <img alt="Shows an illustrated light mode meshery logo in light color mode and a dark mode meshery logo dark color mode." src=".github/readme/images//slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:13px;">
-</picture>
-</a>
+1. Use the dropdown for switching branches/tags to change to the **latest** released tag.
+
+2. Click **Use this template**.
+
+3. Select a name for your new project and click **Create repository from template**.
+
+4. Make your own local working copy of your new repo using git clone, replacing https://github.com/me/example.git with your repo’s web URL:
+
+```bash
+git clone --depth 1 https://github.com/me/example.git
+```
+
+Depending on your environment you may need to adjust the top-level `module` settings in your project's Hugo config file, for example, by adding a proxy to use when downloading remote modules.
+You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level).
+
+Once your settings are adjusted, you can edit your own versions of the site’s source files.
+
+If you want to do SCSS edits and want to publish these, you need to install `PostCSS`
+
+```bash
+npm install
+```
+
+## Running the website locally
+
+Building and running the site locally requires a recent `extended` version of [Hugo](https://gohugo.io).
+You can find out more about how to install Hugo for your environment in our
+[Getting started](https://www.docsy.dev/docs/getting-started/#prerequisites-and-installation) guide.
+
+Once you've made your working copy of the site repo, from the repo root folder, run:
+
+```bash
+hugo server
+```
+
+## Running a container locally
+
+You can run docsy-example inside a [Docker](https://docs.docker.com/)
+container, the container runs with a volume bound to the `docsy-example`
+folder. This approach doesn't require you to install any dependencies other
+than [Docker Desktop](https://www.docker.com/products/docker-desktop) on
+Windows and Mac, and [Docker Compose](https://docs.docker.com/compose/install/)
+on Linux.
+
+1. Build the docker image
+
+   ```bash
+   docker-compose build
+   ```
+
+1. Run the built image
+
+   ```bash
+   docker-compose up
+   ```
+
+   > NOTE: You can run both commands at once with `docker-compose up --build`.
+
+1. Verify that the service is working.
+
+   Open your web browser and type `http://localhost:1313` in your navigation bar,
+   This opens a local instance of the docsy-example homepage. You can now make
+   changes to the docsy example and those changes will immediately show up in your
+   browser after you save.
+
+### Cleanup
+
+To stop Docker Compose, on your terminal window, press **Ctrl + C**.
+
+To remove the produced images run:
+
+```bash
+docker-compose rm
+```
+For more information see the [Docker Compose documentation][].
+
+## Using a local Docsy clone
+
+Make sure your installed go version is `1.18` or higher.
+
+Clone the latest version of the docsy theme into the parent folder of your project. The newly created repo should now reside in a sibling folder of your site's root folder.
+
+```shell
+cd root-of-your-site
+git clone --branch v0.12.0 https://github.com/google/docsy.git ../docsy
+```
+
+Now run:
+
+```shell
+HUGO_MODULE_WORKSPACE=docsy.work hugo server --ignoreVendorPaths "**"
+```
+
+or, when using npm, prepend `local` to the script you want to invoke, e.g.:
+
+```shell
+npm run local serve
+```
+
+By using the `HUGO_MODULE_WORKSPACE` directive (either directly or via prefix `local` when using npm), the server now watches all files and directories inside the sibling directory `../docsy` , too. Any changes inside the local `docsy` theme clone are  now immediately picked up (hot reload), you can instantly see the effect of your local edits.
+
+In the command above, we used the environment variable `HUGO_MODULE_WORKSPACE` to tell hugo about the local workspace file `docsy.work`. Alternatively, you can declare the workspace file inside your settings file `hugo.toml`:
+
+```toml
+[module]
+  workspace = "docsy.work"
+```
+
+Your project's `hugo.toml` file already contains these lines, the directive for workspace assignment is commented out, however. Remove the two trailing comment characters '//' so that this line takes effect.
+
+## Troubleshooting
+
+As you run the website locally, you may run into the following error:
+
+```console
+$ hugo server
+WARN 2023/06/27 16:59:06 Module "project" is not compatible with this Hugo version; run "hugo mod graph" for more information.
+Start building sites …
+hugo v0.101.0-466fa43c16709b4483689930a4f9ac8add5c9f66+extended windows/amd64 BuildDate=2022-06-16T07:09:16Z VendorInfo=gohugoio
+Error: Error building site: "C:\Users\foo\path\to\docsy-example\content\en\_index.md:5:1": failed to extract shortcode: template for shortcode "blocks/cover" not found
+Built in 27 ms
+```
+
+This error occurs if you are running an outdated version of Hugo. As of docsy theme version `v0.12.0`, hugo version `0.146.0` or higher is required.
+See this [section](https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo) of the user guide for instructions on how to install Hugo.
+
+Or you may be confronted with the following error:
+
+```console
+$ hugo server
+
+INFO 2021/01/21 21:07:55 Using config file:
+Building sites … INFO 2021/01/21 21:07:55 syncing static files to /
+Built in 288 ms
+Error: Error building site: TOCSS: failed to transform "scss/main.scss" (text/x-scss): resource "scss/scss/main.scss_9fadf33d895a46083cdd64396b57ef68" not found in file cache
+```
+
+This error occurs if you have not installed the extended version of Hugo.
+See this [section](https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo) of the user guide for instructions on how to install Hugo.
+
+Or you may encounter the following error:
+
+```console
+$ hugo server
+
+Error: failed to download modules: binary with name "go" not found
+```
+
+This error occurs if the `go` programming language is not available on your system.
+See this [section](https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/#install-go-language) of the user guide for instructions on how to install `go`.
 
 
-<a href="https://meshery.io/community"><img alt="Layer5 Community" src=".github/readme/images//community.svg" style="margin-right:8px;padding-top:5px;" width="140px" align="left" /></a>
-
-<p>
-✔️ <em><strong>Join</strong></em> any or all of the weekly meetings on <a href="https://calendar.google.com/calendar/b/1?cid=bGF5ZXI1LmlvX2VoMmFhOWRwZjFnNDBlbHZvYzc2MmpucGhzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20">community calendar</a>.<br />
-✔️ <em><strong>Watch</strong></em> community <a href="https://www.youtube.com/playlist?list=PL3A-A6hPO2IMPPqVjuzgqNU5xwnFFn3n0">meeting recordings</a>.<br />
-✔️ <em><strong>Access</strong></em> the <a href="https://drive.google.com/drive/u/4/folders/0ABH8aabN4WAKUk9PVA">Community Drive</a> by completing a community <a href="https://layer5.io/newcomer">Member Form</a>.<br />
-✔️ <em><strong>Discuss</strong></em> in the <a href="https://discuss.layer5.io">Community Forum</a>.<br />
-✔️<em><strong>Explore more</strong></em> in the <a href="https://layer5.io/community/handbook">Community Handbook</a>.<br />
-</p>
-<p align="center">
-<i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+(org%3Alayer5io+OR+org%3Ameshery+OR+org%3Alayer5labs+OR+org%3Aservice-mesh-performance+OR+org%3Aservice-mesh-patterns+OR+org%3Ameshery-extensions)+label%3A%22help+wanted%22">help-wanted label</a>.</p>
+[alternate dashboard]: https://app.netlify.com/sites/Layer5 Academy/deploys
+[deploys]: https://app.netlify.com/sites/docsy-example/deploys
+[Docsy user guide]: https://docsy.dev/docs
+[Docsy]: https://github.com/google/docsy
+[example.docsy.dev]: https://example.docsy.dev
+[Hugo theme module]: https://gohugo.io/hugo-modules/use-modules/#use-a-module-for-a-theme
+[Netlify]: https://netlify.com
+[Docker Compose documentation]: https://docs.docker.com/compose/gettingstarted/

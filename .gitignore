@@ -16,3 +16,8 @@
 
 # IDEs
 .vscode/*
+
+# nodejs
+node_modules/
+public/
+resources/
