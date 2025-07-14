@@ -4,7 +4,7 @@
   Usage: {{< useshortcode "banner" title="Hello" content="Welcome!" >}}
   Notes: Automatically injects `uuid` as a parameter.
 */}}
-{{- $ctx := partial "tenant-context.html" . -}}
+{{- $ctx := partial "resolve-tenant.html" . -}}
 {{- $uuid := $ctx.uuid -}}
 
 {{- $name := .Get 0 -}}

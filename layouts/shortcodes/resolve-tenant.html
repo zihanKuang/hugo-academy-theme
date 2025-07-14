@@ -1,0 +1,20 @@
+
+
+{{- $path := .Page.File.Path -}}         {{/* example: learning-paths/org-name/... */}}
+{{- $segments := split $path "/" -}}
+{{- $tenantId := "woo" -}}
+
+{{- if ge (len $segments) 2 -}}
+  {{- $tenantId = index $segments 1 -}}
+{{- end -}}
+
+
+{{- $path := .Page.File.Path -}}
+{{- $segments := split $path "/" -}}
+{{- $tenantId := index $segments 1 -}}
+
+
+
+
+
+{{- return (dict "uuid" $tenantId) -}}

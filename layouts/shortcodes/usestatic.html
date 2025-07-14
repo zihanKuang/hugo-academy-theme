@@ -5,7 +5,7 @@
   Output: /static/<uuid>/images/logo.png
 */}}
 
-{{- $ctx := partial "tenant-context.html" . -}}
+{{- $ctx := partial "resolve-tenant.html" . -}}
 {{- $uuid := $ctx.uuid -}}
 {{- $path := .Get 0 -}}
 {{- printf "/static/%s/%s" $uuid $path | relURL -}}
