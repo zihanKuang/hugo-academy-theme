@@ -2,10 +2,10 @@
   Shortcode: usestatic
   Description: Resolves the path to a static asset within the current tenant's UUID scope.
   Usage: {{< usestatic "images/logo.png" >}}
-  Output: /static/<uuid>/images/logo.png
+  Output: /<uuid>/images/logo.png
 */}}
 
 {{- $ctx := partial "resolve-tenant.html" . -}}
 {{- $uuid := $ctx.uuid -}}
 {{- $path := .Get 0 -}}
-{{- printf "/static/%s/%s" $uuid $path | relURL -}}
+{{- printf "/%s/%s" $uuid $path | relURL -}}
