@@ -17,8 +17,10 @@
 # IDEs
 .vscode/*
 
-# hugo
+# nodejs
+node_modules/
 public/
 resources/
-node_modules/
+
+#hugo 
 .hugo_build.lock
