@@ -1,4 +1,4 @@
-module github.com/layer5io/hugo-academy-theme
+module github.com/layer5io/academy-theme
 
 go 1.12
 
