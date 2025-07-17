@@ -1,4 +1,4 @@
-module github.com/ZihanKuang/academy-theme
+module github.com/zihanKuang/academy-theme
 
 go 1.12
 
