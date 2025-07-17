@@ -17,8 +17,6 @@ body {
   border: none;
 }
 
-
-
 .td-main main {
   background: white;
   border-radius: 1rem;
@@ -31,4 +29,15 @@ body {
   border-radius: 1rem;
   box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12) ;
   border: none;
+}
+
+@supports (position: sticky) {
+  .td-sidebar-toc {
+    position: sticky;
+    top: 4rem; 
+
+    height: calc(100vh - 8rem); 
+
+    overflow-y: auto;
+  }
 }
