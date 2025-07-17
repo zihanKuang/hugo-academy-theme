@@ -1,4 +1,4 @@
-module github.com/layer5io/academy-theme
+module github.com/ZihanKuang/academy-theme
 
 go 1.12
 
