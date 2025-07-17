@@ -1,0 +1,10 @@
+{{ if gt (len .TableOfContents) 60 }}
+  <div class="td-page-meta-toc-container">
+    <h2 class="ms-2">Contents</h2>
+    <nav id="TableOfContents" class="td-toc">
+      {{ .TableOfContents }}
+    </nav>
+  </div>
+{{ end }}
+
+
