@@ -23,26 +23,26 @@ body {
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   border: none;
-  overflow-y: auto;
+  overflow-y: scroll;
+  scrollbar-width: none;
   position: sticky;
-  top: 1rem;
+  top: 0.5rem;
   padding: 1rem;
 
   &::-webkit-scrollbar {
     display: none; /* chrome */
   }
-
+  .td-sidebar-nav {
+    &::-webkit-scrollbar {
+      display: none; /* chrome */
+    }
+  }
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   .foldable-nav {
     .td-sidebar-nav__section-title {
       cursor: pointer;
       transition: all 0.2s ease-in-out;
-
-      &:hover {
-        background-color: #f8f9fa;
-        border-radius: 0.25rem;
-      }
 
       &.with-child.active-path::before {
         transform: rotate(90deg);
