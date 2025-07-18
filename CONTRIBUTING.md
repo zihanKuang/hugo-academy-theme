@@ -36,13 +36,13 @@ To develop this theme locally, you can link it to a Hugo site (like the [academy
     Ensure you have cloned both this theme repository and your Hugo site repository into the same parent directory. Your folder structure should look like this:
     ```
     my-hugo-projects/
-    ├── your-hugo-site/      <-- Your content project
+    ├── academy-example/     <-- Your content project
     └── hugo-academy-theme/  <-- This theme project
     ```
 
 2.  **Modify `go.mod`**
 
-    In your Hugo site's (`your-hugo-site/`) `go.mod` file, add the following `replace` directive to point to your local theme folder:
+    In your site's (`academy-example/`) `go.mod` file, add the following `replace` directive to point to your local theme folder:
     ```go
     replace github.com/layer5io/academy-theme => ../hugo-academy-theme
     ```
