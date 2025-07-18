@@ -26,3 +26,26 @@ information on using pull requests.
 
 This project follows
 [Google's Open Source Community Guidelines](https://opensource.google.com/conduct/).
+
+## Local Development
+
+To develop this theme locally, you can link it to a Hugo site (like the [academy starter template](https://github.com/layer5io/academy-example)) using a `replace` directive in the site's `go.mod` file.
+
+1.  **Directory Setup**
+
+    Ensure you have cloned both this theme repository and your Hugo site repository into the same parent directory. Your folder structure should look like this:
+    ```
+    my-hugo-projects/
+    ├── your-hugo-site/      <-- Your content project
+    └── hugo-academy-theme/  <-- This theme project
+    ```
+
+2.  **Modify `go.mod`**
+
+    In your Hugo site's (`your-hugo-site/`) `go.mod` file, add the following `replace` directive to point to your local theme folder:
+    ```go
+    replace github.com/layer5io/academy-theme => ../hugo-academy-theme
+    ```
+
+3.  **Run the Server**
+    Now, when you run `make site` from within your site's directory, Hugo will use your local theme files instead of fetching the remote module, allowing you to see your changes live.
