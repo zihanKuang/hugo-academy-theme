@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include .github/build/Makefile.show-help.mk
+include .github/build/Makefile-show-help.mk
 
 ## Install docs.layer5.io dependencies on your local machine.
 ## See https://gohugo.io/categories/installation
