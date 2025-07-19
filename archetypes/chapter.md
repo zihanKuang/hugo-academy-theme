@@ -1,14 +1,8 @@
 ---
-docType: "Chapter"
-id: '{{ replace .File.ContentBaseName ` ` `-` | lower }}'
-chapterTitle: '{{ replace .File.ContentBaseName `-` ` ` | title }}'
+type: "chapter"
+title: '{{ replace .File.ContentBaseName `-` ` ` | title }}'
 description: "Enter a brief description of this chapter here..."
-lectures: 1
-weight: 
+weight: 10 # Default weight, can be adjusted by user
 ---
 
 ### Start writing your chapter content here
-
-You can add images, code blocks, and other content.
-
-![image]({{< usestatic "path/to/your/image.png" >}})
