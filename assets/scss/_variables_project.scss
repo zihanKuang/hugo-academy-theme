@@ -6,27 +6,27 @@ $enable-shadows: false;
 // Theme colors
 
 $primary: #00b39f;
-$secondary: #00d3a9;
+$secondary: #3C494F;
 
-$success: #3772ff !default;
-$info: #c0e0de !default;
-$warning: #ed6a5a !default;
-$danger: #ed6a5a;
-$light: #d3f3ee;
-$dark: #121212;
+$success: #2e7d32 !default;
+$info: #0288d1 !default;
+$warning: #ed6c02 !default;
+$danger: #d32f2f;
+$light: #E8EFF3;
+$dark: #000D12;
 $blonde: #fff3c5;
 $saffron: #ebc017;
-$lightslategray: #7a848e;
-$casper: #b1b6b8;
+$lightslategray: #647176;
+$casper: #B1B9BC;
 
 // $bg-gradient:#1E2117;
-$code-color: shade-color($secondary, 40%) !default;
+$code-color: $secondary !default;
 // $body-bg: linear-gradient(250deg, #477e96 0%, #00b39f 35%, rgb(60, 73, 79) 100%);
 // $bg-gradient-dark: linear-gradient(250deg, #477e96 0%, #00b39f 35%, rgb(60, 73, 79) 100%);
 
 // Body
-$body-color: #cccccc;
-$body-bg: #010101;
+$body-color: rgba(0, 0, 0, 0.87);
+$body-bg: #FDFDFD;
 // $bs-body-bg: $dark;
 // $bs-card-cap-bg: $dark;
 
@@ -40,27 +40,26 @@ $btn-close-color: $white;
 
 // Lefthand sidebar with inter-page docs menu
 
-$border-color: rgba($primary, 0.33);
-$td-sidebar-tree-root-color: #ccc;
-$td-sidebar-bg-color: rgba($dark, 0.5);
-$td-sidebar-color: rgba($white, 0.33);
+$border-color: #EAEDEE;
+$td-sidebar-tree-root-color: rgba(255, 255, 255, 0.9);
+$td-sidebar-bg-color:$light; 
+$td-sidebar-color: $secondary;
 $td-sidebar-border-color: $border-color;
 
 // Righthand sidebar with intra-page table of contents
-$td-sidebar-toc-bg-color: rgba($dark, 0.5);
+$td-sidebar-toc-bg-color: #263238;
 
 // Background colors for the sections on home page etc. It is a paint by number
 // system, starting at 0, where the number is taken from the shortcode's ordinal
 // if not provided by the user. These colors are all part of the theme palette,
 // but the mix is fairly random to create variation. This can be overridden by
 // the project if needed.
-$td-box-colors: $dark, $primary, $secondary, $info, $white, $gray-600, $success,
-  $warning, $dark, $danger, $primary, $secondary, $info !default;
+$td-box-colors: $secondary, $primary, $light, $info, white, #757575, $success, $warning, $danger !default;
 
-$bs-link-color: $danger;
+$bs-link-color: $primary;
 $link-decoration: none !default;
 $link-shade-percentage: 30% !default;
-$link-color: $white !default;
+$link-color: $primary !default;
 
 // Fonts
 
@@ -106,14 +105,5 @@ $td-block-space-bottom-base: 4 * $spacer !default;
 
 // Pagination
 
-$pagination-color: $gray-600 !default;
-$pagination-disabled-color: $gray-300 !default;
-
-// Navbar
-
-$navbar-dark-color: rgba($white, 0.75) !default;
-$navbar-dark-hover-color: rgba($white, 0.35) !default;
-
-// Footer
-
-$list-inline-padding: $spacer;
+$pagination-color: $secondary !default;
+$pagination-disabled-color: #B1B9BC !default;

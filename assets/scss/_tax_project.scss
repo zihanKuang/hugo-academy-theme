@@ -85,15 +85,15 @@
     margin-left: 0.6em;
     text-align: center;
     border-radius: 1em;
-    background-color: $gray-900;
-    color: $light;
+    background-color: $light;
+    color: $secondary;
   }
   
   .taxonomy-term {
-    background: $gray-600;
+    background:  #d3d3d3;;
     border-width: 0;
     border-radius: 0 3px 3px 0;
-    color: $gray-900;
+    color: $secondary;
     display: inline-block;
     font-size: 1em;
     line-height: 1.5em;
@@ -110,6 +110,12 @@
     &:hover {
       background-color: $primary;
       color: $white;
+
+      .taxonomy-count {
+        background-color: $white; 
+        color: $primary;  
+      }
+  
     }
   
     &:hover::before {
@@ -123,7 +129,7 @@
       background: none;
       border-width: 0;
       border-radius: 0;
-      color: $gray-600;
+      color: $secondary;
       font-size: 1em;
       line-height: 1.5em;
       min-height: 1.5em;
@@ -140,7 +146,7 @@
         color: $link-color;
   
         .taxonomy-count {
-          color: $dark !important;
+          color: $link-color !important;
         }
       }
   
@@ -151,7 +157,7 @@
   
     li + li::before {
       content: "|";
-      color: $gray-600;
+      color: $border-color;
       margin-right: 0.2em;
     }
   
@@ -231,7 +237,7 @@
   
       &:hover::before {
         background: none;
-        text-shadow: 0 0 3px $gray-900;
+        text-shadow: 0 0 5px rgba($dark, 0.5);
       }
     }
   
@@ -306,7 +312,7 @@
     &.card {
       padding: 1em;
       margin-bottom: 1.5em;
-      background-color: $dark;
+       background-color: white;
     }
   
     .breadcrumb {

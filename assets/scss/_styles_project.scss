@@ -9,7 +9,7 @@
 
 // Page Layout Sections
 .td-home {
-  background-color: $dark;
+  background-color: $body-bg;
   overflow-x: hidden;
 }
 
@@ -38,7 +38,7 @@ body {
 // Main Middle Body
 .td-content {
   h2 {
-    color: $casper;
+    color: $dark;
   }
 
   // Inline code
@@ -50,7 +50,7 @@ body {
     margin: 0;
     font-size: 85%;
     word-break: normal;
-    background-color: rgba($black, 0.05);
+    background-color: #EAEDEE;
     border-radius: $border-radius;
 
     br {
@@ -61,7 +61,7 @@ body {
   // Code blocks
   pre {
     word-wrap: normal;
-    background-color: $gray-900;
+    background-color: #EAEDEE;
     padding: $spacer;
 
     >code {
@@ -98,7 +98,7 @@ a {
 }
 
 a:hover {
-  color: $white;
+  color: rgba($primary, 0.7);
 }
 
 a:not([href]):not([class]),
@@ -109,7 +109,7 @@ a:not([href]):not([class]):hover {
 
 // Taxonomy
 .article-meta-bg {
-  background-color: $gray-900;
+  background-color: $light;
   padding: 0.5rem;
   padding-left: 1rem;
 }
@@ -146,7 +146,7 @@ a:not([href]):not([class]):hover {
     &.card {
       padding: 1em;
       margin-bottom: 1.5em;
-      background-color: $dark;
+      background-color: white;
     }
 
     .breadcrumb {
@@ -161,12 +161,7 @@ a:not([href]):not([class]):hover {
 }
 
 .td-sidebar {
-  background-image: linear-gradient(to top,
-      #1e2117,
-      #1d1912,
-      #18120e,
-      #0f0a09,
-      #000000);
+  background-image: $td-sidebar-bg-color;
   position: sticky;
   height: calc(100vh - 5.5rem);
   top: 5.5rem;
@@ -199,14 +194,14 @@ a:not([href]):not([class]):hover {
 
   &__section-title {
     a {
-      color: $gray-400;
+      color: dark;
       font-weight: $font-weight-bold;
     }
   }
 
   .td-sidebar-link {
     &__page {
-      color: $gray-400;
+      color: $td-sidebar-color;
       font-weight: $font-weight-light;
     }
 
@@ -229,34 +224,25 @@ a:not([href]):not([class]):hover {
 
   a {
     &:hover {
-      color: $white;
+      color: dark;
       text-decoration: none;
     }
 
     &.active:not(.tree-root) {
-      border-width: 1px;
-      border-style: solid;
-      border-image: linear-gradient(to left,
-          rgba($dark, 0) 30%,
-          rgba($primary, 0.3) 60%,
-          $primary 90% 100%) 1;
-      background-image: linear-gradient(to left,
-          rgba($dark, 0.2) 30%,
-          rgba($primary, 0.3) 60%,
-          $primary 90% 100%) 1;
+      background-color: rgba($primary, 0.15); 
+      color: dark;
+      border-radius: 4px; 
+      border-left: 4px solid $primary;
       padding: 0.25rem;
-      padding-left: 0.5rem !important;
-      // background-image: linear-gradient(to left, rgba($dark,.33),rgba($dark,.5),rgba($dark,.75),#1e2117, #31412b, #3b6447, #378b6d, #00b39f);
-      // background-color: rgba($primary, .05);
-      color: $secondary;
+      padding-left: calc(0.5rem - 4px) !important; 
     }
 
     &.active.tree-root {
       border: 2px solid $lightslategray !important;
       padding: 0.25rem;
       padding-left: 0.5rem !important;
-      background-color: rgba($lightslategray, 0.1);
-      color: $white;
+      background-color: rgba($primary, 0.1);
+      color: dark;
     }
   }
 }
@@ -264,13 +250,8 @@ a:not([href]):not([class]):hover {
 // Right sidebar
 .td-sidebar-toc {
   line-height: 1.25rem;
-  border-left: 1px solid $border-color;
-  background-image: linear-gradient(to top,
-      #1e2117,
-      #1d1912,
-      #18120e,
-      #0f0a09,
-      #000000);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: $td-sidebar-bg-color; 
 
   @supports (position: sticky) {
     position: sticky;
@@ -288,12 +269,12 @@ a:not([href]):not([class]):hover {
 .td-page-meta {
   a {
     display: block;
-    color: $gray-400;
+    color: dark;
     line-height: 1.65rem;
     font-weight: $font-weight-medium;
 
     &:hover {
-      color: $white;
+      color: dark;
       text-decoration: none;
     }
   }
@@ -308,7 +289,7 @@ a:not([href]):not([class]):hover {
 
   #TableOfContents {
     a {
-      color: $lightslategray;
+      color: $td-sidebar-color;
 
       &:hover {
         color: $white;
@@ -321,32 +302,32 @@ a:not([href]):not([class]):hover {
 // pageinfo
 .pageinfo {
   font-weight: $font-weight-medium;
-  background: $black;
+  background: $light;
   font-family: "Open Sans";
   border-style: solid;
-  border-color: #00b39f;
+  border-color: $primary;
 }
 
 .heading {
   font-size: 1.2rem;
-  color: #00b39f;
+  color: $primary;
 }
 
 .matterheader {
   font-size: 1.2rem;
-  color: $casper;
+  color: $secondary;
 }
 
 // Style alert boxes.
 
 .alert {
   font-weight: $font-weight-medium;
-  background: $gray-900;
-  color: inherit;
+  background: $light;
+  color: $dark; 
   border-radius: 0;
 
   &.alert-custom {
-    background-color: $gray-900;
+    background-color: $light;
     border-style: solid;
     border-width: 0 0 0 4px;
   }
@@ -445,8 +426,8 @@ a:not([href]):not([class]):hover {
   flex-shrink: 0;
   overflow: hidden;
   background-image: linear-gradient(180deg,
-      rgba(0, 179, 115, 0) 0%,
-      rgba(0, 179, 159, 0.3) 100%);
+      rgba($primary, 0) 0%,
+      rgba($primary, 0.3) 100%);
   position: absolute;
   top: -18rem;
   right: -32rem;
@@ -480,8 +461,8 @@ a:not([href]):not([class]):hover {
     height: 74.125rem;
     flex-shrink: 0;
     background: radial-gradient(50% 50% at 50% 50%,
-        rgba(0, 179, 159, 0.2) 0%,
-        rgba(0, 179, 159, 0) 100%);
+        rgba($primary, 0) 0%,
+        rgba($primary, 0.3) 100%);
     position: absolute;
     overflow: hidden;
     background-clip: border-box;
@@ -511,10 +492,8 @@ a:not([href]):not([class]):hover {
   }
 
   a.dash-sign {
-    color: #fffbf1;
-    text-shadow:
-      0 20px 25px #2e2e31,
-      0 40px 60px #2e2e31;
+    color: white;
+    text-shadow: 0 20px 25px rgba($dark, 0.25), 0 40px 60px rgba($dark, 0.15);
     font-size: 28px;
     font-weight: 600;
     text-decoration: none;
@@ -529,7 +508,7 @@ a:not([href]):not([class]):hover {
     transform: translateX(-50%) translateY(-50%);
 
     &:hover {
-      color: "#EBC017" !important;
+      color: $saffron !important;
     }
 
     @media (max-width: 1440px) {
@@ -559,7 +538,7 @@ a:not([href]):not([class]):hover {
 
   a.dash-sign:after {
     border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $primary $secondary;
-    box-shadow: 25px 25px 25px rgba(46, 46, 49, 0.8);
+    box-shadow: 25px 25px 25px rgba($dark, 0.5);;
   }
 
   a.dash-sign:visited {
@@ -574,7 +553,7 @@ a:not([href]):not([class]):hover {
 
 // Cards
 .card {
-  background-color: $dark;
+  background-color: white;
 }
 
 .card-header {
@@ -583,11 +562,12 @@ a:not([href]):not([class]):hover {
 }
 
 .card-header .bg-white {
-  background-color: $dark;
+  background-color: transparent !important;
 }
 
 .bg-dark {
-  background-color: $dark;
+  background-color: $td-sidebar-bg-color; 
+  color: white;
 }
 
 .sc-imWYAI.sc-fTFjTM.dCEJze.hRziAa {
@@ -598,17 +578,17 @@ a:not([href]):not([class]):hover {
   aspect-ratio: 1;
   top: 6px !important;
   right: 10px !important;
-  color: $lightslategray !important;
-  background-color: $dark !important;
+  color: $secondary !important;
+  background-color: transparent !important;
 
   &:hover {
-    color: $body-color !important;
+    color: $primary !important;
   }
 }
 
 .tooltip .tooltip-inner {
-  background-color: $dark;
-  color: $body-color;
+  background-color: #616161;
+  color: white;
 }
 
 .tab-body {
@@ -623,7 +603,7 @@ a:not([href]):not([class]):hover {
 }
 
 .nav-tabs .nav-link.active {
-  color: #00d3a9;
+  color: $primary;
 }
 
 .csvtable {
@@ -632,7 +612,7 @@ a:not([href]):not([class]):hover {
 // Only target the tabbed panels using ID naming convention
 
 [id^="tabs-"] {
-  border: 1px solid rgba($light, 0.1);
+  border: 1px solid $border-color;;
   border-radius: 0.5rem;
   padding: .5rem;
   margin-bottom: 1rem;
@@ -640,9 +620,9 @@ a:not([href]):not([class]):hover {
   box-shadow: 0 0 8px rgba($dark, 0.2);
 
   .nav-link {
-    color: $light;
-    background-color: rgba($light, 0.3); // 🆕 consistent visible bg for inactive tabs
-    border: 2px solid rgba($light, 0.15);
+    color: $secondary;
+    background-color: transparent; // 🆕 consistent visible bg for inactive tabs
+    border: 2px solid transparent;
     border-radius: 0.5rem 0.5rem 0 0;
     margin: 2px;
     padding: 0.5rem 1rem;
@@ -654,8 +634,8 @@ a:not([href]):not([class]):hover {
     box-shadow: 0 0 4px rgba($dark, 0.05); // 🆕 soft shadow for depth
 
     &:hover {
-      background-color: rgba($light, 0.5);
-      color: $white;
+      background-color: rgba($primary, 0.1);
+      color: $dark;
     }
 
     &.active {
@@ -672,7 +652,7 @@ a:not([href]):not([class]):hover {
    .nav-link.disabled {
     background: transparent;
     border: none;
-    color: rgba($light, 0.5);
+    color: #B1B9BC;
     font-weight: 400;
     cursor: default;
     box-shadow: none;
