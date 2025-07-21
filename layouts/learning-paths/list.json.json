@@ -16,6 +16,7 @@
         "description": {{ $p.Description | jsonify }},
         "banner": {{ $p.Params.Banner | absURL | jsonify }},
         "permalink": {{ $p.Permalink | jsonify }},
+        "id": {{ $p.Params.Id | jsonify }},
         "orgId": {{ $uuid | jsonify }},
         "courses": [
           {{- range $j, $c := $children }}
