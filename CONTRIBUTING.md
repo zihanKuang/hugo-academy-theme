@@ -22,11 +22,6 @@ use GitHub pull requests for this purpose. Consult
 [GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
 information on using pull requests.
 
-## Community Guidelines
-
-This project follows
-[Google's Open Source Community Guidelines](https://opensource.google.com/conduct/).
-
 ## Local Development
 
 To develop this theme locally, you can link it to a Hugo site (like the [academy starter template](https://github.com/layer5io/academy-example)) using a `replace` directive in the site's `go.mod` file.
@@ -75,3 +70,4 @@ To ensure you have the latest version of the theme or to upgrade to a newer rele
     ```
 
     Your site should now be running with the updated theme.
+
