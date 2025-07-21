@@ -25,8 +25,8 @@ taxonomies:
   category: categories
 
 # Highlighting config
-pygmentsCodeFences: true
-pygmentsUseClasses: true
+# pygmentsCodeFences: true
+# pygmentsUseClasses: true
 # Use the new Chroma Go highlighter in Hugo.
 pygmentsUseClassic: false
 # pygmentsOptions: "linenos=table"
@@ -63,6 +63,8 @@ markup:
     # style: tango
     # Uncomment if you want your chosen highlight style used for code blocks without a specified language
     # guessSyntax: true
+    noClasses: false
+    style: github 
 
 # Everything below this are Site Params
 

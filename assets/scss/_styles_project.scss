@@ -26,7 +26,7 @@
 
 //main sections
 .td-outer {
-  margin-top: 3rem;
+  //margin-top: 3rem;
 }
 
 .td-main main {
@@ -678,4 +678,8 @@ html {
 
 h1, h2, h3, h4, h5, h6 {
   scroll-margin-top: 1rem;
+}
+
+.td-content .card-title {
+  color: $dark; 
 }
