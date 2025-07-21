@@ -35,7 +35,7 @@ To develop this theme locally, you can link it to a Hugo site (like the [academy
 
     Ensure you have cloned both this theme repository and your Hugo site repository into the same parent directory. Your folder structure should look like this:
     ```
-    my-hugo-projects/
+    my-academy-content/
     ├── academy-example/     <-- Your content project
     └── academy-theme/  <-- This theme project
     ```
