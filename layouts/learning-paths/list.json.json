@@ -18,7 +18,7 @@
         "slug": {{ or $p.Slug $p.File.ContentBaseName | jsonify }},
         "permalink": {{ $p.Permalink | jsonify }},
         "level": {{ $p.Params.level | jsonify }},
-        "id": {{ or $p.Params.Id $p.Permalink | jsonify }},
+        "id": {{ or $p.Params.Id  (md5 $p.Permalink) | jsonify }},
         "orgId": {{ $uuid | jsonify }},
         "courses": [
           {{- range $j, $c := $children }}
