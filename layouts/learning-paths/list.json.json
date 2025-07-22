@@ -15,16 +15,21 @@
         "title": {{ $p.Title | jsonify }},
         "description": {{ $p.Description | jsonify }},
         "banner": {{ $p.Params.Banner | absURL | jsonify }},
+        "slug": {{ or $p.Slug $p.File.ContentBaseName | jsonify }},
         "permalink": {{ $p.Permalink | jsonify }},
-        "id": {{ $p.Params.Id | jsonify }},
+        "level": {{ $p.Params.level | jsonify }},
+        "id": {{ or $p.Params.Id $p.Permalink | jsonify }},
         "orgId": {{ $uuid | jsonify }},
         "courses": [
           {{- range $j, $c := $children }}
             {{- if $j }},{{ end }}
             {
               "title": {{ $c.Title | jsonify }},
+              "slug": {{ or $c.Slug $c.File.ContentBaseName | jsonify }},
+              "id": {{ or $c.Params.Id $c.Permalink | jsonify }},
+              "level": {{ $c.Params.level | jsonify }},
               "description": {{ $c.Description | jsonify }},
-              "order": {{ $c.Params.Order | jsonify}},
+              "weight": {{ $c.Params.Order | jsonify}},
               "banner": {{ $c.Params.Banner | absURL | jsonify }},
               "permalink": {{ $c.Permalink | jsonify }}
             }
