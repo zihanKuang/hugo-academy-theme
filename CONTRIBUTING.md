@@ -70,4 +70,5 @@ To ensure you have the latest version of the theme or to upgrade to a newer rele
     ```
 
     Your site should now be running with the updated theme.
-
+    
+For detailed update instructions, see UPDATING.md
