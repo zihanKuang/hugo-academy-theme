@@ -14,7 +14,7 @@
       {
         "title": {{ $p.Title | jsonify }},
         "description": {{ $p.Description | jsonify }},
-        "banners": {{ $p.Params.Banner | absURL | jsonify }},
+        "banner": {{ $p.Params.Banner | absURL | jsonify }},
         "slug": {{ or $p.Slug $p.File.ContentBaseName | jsonify }},
         "permalink": {{ $p.Permalink | jsonify }},
         "level": {{ $p.Params.level | jsonify }},
