@@ -20,7 +20,7 @@
         "level": {{ $p.Params.level | jsonify }},
         "id": {{ or $p.Params.Id  (md5 $p.Permalink) | jsonify }},
         "orgId": {{ $uuid | jsonify }},
-        "contentType": {{ $p.Params.Type | jsonify }} ,
+        "type": {{ $p.Params.Type | jsonify }} ,
         "courses": [
           {{- range $j, $c := $children }}
             {{- if $j }},{{ end }}
