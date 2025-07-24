@@ -12,16 +12,14 @@
       {{- $children := $p.Pages }}
 
       {{- $banner_url := "" -}}
-      {{- if $p.Params.Banner -}} {{/* 1. 首先确保 banner 字段不为空 */}}
+      {{- if $p.Params.Banner -}}
         {{- if strings.HasPrefix $p.Params.Banner $uuid -}}
-          {{- /* 2. 如果 banner 已经包含 orgId (旧数据)，就直接用，保证兼容 */ -}}
           {{- $banner_url = $p.Params.Banner | absURL -}}
         {{- else -}}
-          {{- /* 3. 如果不包含 orgId (新数据)，就用 printf 自动拼接 */ -}}
           {{- $banner_url = printf "%s/%s" $uuid $p.Params.Banner | absURL -}}
         {{- end -}}
       {{- end -}}
-      
+
       {
         "title": {{ $p.Title | jsonify }},
         "description": {{ $p.Description | jsonify }},
@@ -35,6 +33,16 @@
         "courses": [
           {{- range $j, $c := $children }}
             {{- if $j }},{{ end }}
+
+            {{- $course_banner_url := "" -}}
+            {{- if $c.Params.Banner -}}
+                {{- if strings.HasPrefix $c.Params.Banner $uuid -}}
+                  {{- $course_banner_url = $c.Params.Banner | absURL -}}
+                {{- else -}}
+                  {{- $course_banner_url = printf "%s/%s" $uuid $c.Params.Banner | absURL -}}
+                {{- end -}}
+            {{- end -}}
+
             {
               "title": {{ $c.Title | jsonify }},
               "slug": {{ or $c.Slug $c.File.ContentBaseName | jsonify }},
