@@ -50,7 +50,7 @@
               "level": {{ $c.Params.level | jsonify }},
               "description": {{ $c.Description | jsonify }},
               "weight": {{ $c.Params.Order | jsonify}},
-              "banner": {{ $c.Params.Banner | absURL | jsonify }},
+              "banner": {{ $course_banner_url | jsonify }},
               "permalink": {{ $c.Permalink | jsonify }}
             }
           {{- end }}
