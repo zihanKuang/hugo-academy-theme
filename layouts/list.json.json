@@ -14,7 +14,16 @@
       {
         "title": {{ $p.Title | jsonify }},
         "description": {{ $p.Description | jsonify }},
-        "banner": {{ $p.Params.Banner | absURL | jsonify }},
+        // "banner": {{ $p.Params.Banner | absURL | jsonify }},
+
+        {{- $banner_url := "" -}}
+        {{- with $p.Resources.GetMatch $p.Params.Banner -}}
+          {{- $banner_url = .Permalink -}}
+        {{- else -}}
+          {{- $banner_url = $p.Params.Banner | absURL -}}
+        {{- end -}}
+        "banner": {{ $banner_url | jsonify }},
+
         "slug": {{ or $p.Slug $p.File.ContentBaseName | jsonify }},
         "permalink": {{ $p.Permalink | jsonify }},
         "level": {{ $p.Params.level | jsonify }},
