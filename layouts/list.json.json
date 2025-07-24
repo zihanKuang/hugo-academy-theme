@@ -11,13 +11,10 @@
 
       {{- $children := $p.Pages }}
 
+      {{- /* Prepend the orgId to the parent Learning Path's banner path. */ -}}
       {{- $banner_url := "" -}}
       {{- if $p.Params.Banner -}}
-        {{- if strings.HasPrefix $p.Params.Banner $uuid -}}
-          {{- $banner_url = $p.Params.Banner | absURL -}}
-        {{- else -}}
-          {{- $banner_url = printf "%s/%s" $uuid $p.Params.Banner | absURL -}}
-        {{- end -}}
+        {{- $banner_url = printf "%s/%s" $uuid $p.Params.Banner | absURL -}}
       {{- end -}}
 
       {
@@ -34,13 +31,10 @@
           {{- range $j, $c := $children }}
             {{- if $j }},{{ end }}
 
+            {{- /* Prepend the orgId to the nested Course's banner path. */ -}}
             {{- $course_banner_url := "" -}}
             {{- if $c.Params.Banner -}}
-                {{- if strings.HasPrefix $c.Params.Banner $uuid -}}
-                  {{- $course_banner_url = $c.Params.Banner | absURL -}}
-                {{- else -}}
-                  {{- $course_banner_url = printf "%s/%s" $uuid $c.Params.Banner | absURL -}}
-                {{- end -}}
+              {{- $course_banner_url = printf "%s/%s" $uuid $c.Params.Banner | absURL -}}
             {{- end -}}
 
             {
