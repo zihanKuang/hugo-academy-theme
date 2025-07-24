@@ -11,10 +11,16 @@
 
       {{- $children := $p.Pages }}
 
+      {{- /* Prepend the orgId to the parent Learning Path's banner path. */ -}}
+      {{- $banner_url := "" -}}
+      {{- if $p.Params.Banner -}}
+        {{- $banner_url = printf "%s/%s" $uuid $p.Params.Banner | absURL -}}
+      {{- end -}}
+
       {
         "title": {{ $p.Title | jsonify }},
         "description": {{ $p.Description | jsonify }},
-        "banner": {{ $p.Params.Banner | absURL | jsonify }},
+        "banner": {{ $banner_url | jsonify }},
         "slug": {{ or $p.Slug $p.File.ContentBaseName | jsonify }},
         "permalink": {{ $p.Permalink | jsonify }},
         "level": {{ $p.Params.level | jsonify }},
@@ -24,6 +30,13 @@
         "courses": [
           {{- range $j, $c := $children }}
             {{- if $j }},{{ end }}
+
+            {{- /* Prepend the orgId to the nested Course's banner path. */ -}}
+            {{- $course_banner_url := "" -}}
+            {{- if $c.Params.Banner -}}
+              {{- $course_banner_url = printf "%s/%s" $uuid $c.Params.Banner | absURL -}}
+            {{- end -}}
+
             {
               "title": {{ $c.Title | jsonify }},
               "slug": {{ or $c.Slug $c.File.ContentBaseName | jsonify }},
@@ -31,7 +44,7 @@
               "level": {{ $c.Params.level | jsonify }},
               "description": {{ $c.Description | jsonify }},
               "weight": {{ $c.Params.Order | jsonify}},
-              "banner": {{ $c.Params.Banner | absURL | jsonify }},
+              "banner": {{ $course_banner_url | jsonify }},
               "permalink": {{ $c.Permalink | jsonify }}
             }
           {{- end }}
