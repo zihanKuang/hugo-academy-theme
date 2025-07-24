@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ${{ matrix.dependent-repo }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
           path: dependent
           ref: master
 
@@ -38,7 +38,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           path: dependent
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
           branch: update-academy-theme-${{ github.event.release.tag_name }}
           title: '[Automated] Update academy-theme to ${{ github.event.release.tag_name }}'
           body: |
