@@ -72,4 +72,5 @@ To ensure you have the latest version of the theme or to upgrade to a newer rele
 
     Your site should now be running with the updated theme.
 
-    For detailed guide, check [https://docs.layer5.io/cloud/academy/creating-your-learning-path/#6-ongoing-maintenance-and-updates]
+    For detailed guide, check：
+    [Creating your learning path – ongoing maintenance and updates](https://docs.layer5.io/cloud/academy/creating-your-learning-path/#6-ongoing-maintenance-and-updates)
