@@ -5,8 +5,6 @@
 @import "variables_project.scss";
 @import "tax_project.scss";
 @import "search_project.scss";
-@import "elements_project";
-
 
 
 // Page Layout Sections
@@ -21,10 +19,6 @@
 // }
 
 //main sections
-.td-outer {
-  //margin-top: 3rem;
-}
-
 .td-main main {
   @include media-breakpoint-up(md) {
     padding-top: 4rem;
