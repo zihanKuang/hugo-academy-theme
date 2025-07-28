@@ -18,10 +18,12 @@
       {{- end -}}
 
 
-      {{ if $p.Params.level }}
+      {{ $level := $p.Params.level }}
+      {{ if $level }}
           {{- /* Validate the level parameter */ -}}
-          {{- if not (in (slice "beginner" "intermediate" "advanced") $p.Params.level) }}
-            {{ errorf "Invalid value for 'level': %s. Expected one of 'beginner', 'intermediate', or 'advanced'." $p.Params.level }}
+          {{- if not (in (slice "beginner" "intermediate" "advanced") $level) }}
+            {{ warnf "Invalid value for 'level': %s. Expected one of 'beginner', 'intermediate', or 'advanced' in %s " $level $p.File.Path }}
+            {{ $level = "beginner" }}
           {{ end }}
       {{- end }}
 
@@ -29,7 +31,7 @@
       {
 
         "id": {{ or $p.Params.Id  (md5 $p.Permalink) | jsonify }},
-        "level": {{ or $p.Params.level "beginner" | jsonify }},
+        "level": {{ or $level "beginner" | jsonify }},
         "slug": {{ or $p.Slug $p.File.ContentBaseName | jsonify }},
         "org_id": {{ $uuid | jsonify }},
         "type": {{ $p.Params.Type | jsonify }} ,
