@@ -17,6 +17,15 @@
         {{- $banner_url = printf "%s/%s" $uuid $p.Params.Banner | absURL -}}
       {{- end -}}
 
+
+      {{ if $p.Params.level }}
+          {{- /* Validate the level parameter */ -}}
+          {{- if not (in (slice "beginner" "intermediate" "advanced") $p.Params.level) }}
+            {{ errorf "Invalid value for 'level': %s. Expected one of 'beginner', 'intermediate', or 'advanced'." $p.Params.level }}
+          {{ end }}
+      {{- end }}
+
+
       {
 
         "id": {{ or $p.Params.Id  (md5 $p.Permalink) | jsonify }},
