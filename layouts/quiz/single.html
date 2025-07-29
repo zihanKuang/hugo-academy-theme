@@ -250,8 +250,7 @@
 
     <div class="form-container">
         <form id="quiz-form"  >
-            <input type="hidden" name="quiz_id" value="{{ .Params.id }}">
-            <input type="hidden" name="user_id" value="user123"> <!-- Replace with actual user ID -->
+            <input type="hidden" name="quiz_abs_path" value="{{ .RelPermalink }}">
 
             {{ range $index, $question := .Params.questions }}
             <div class="question" data-question-id="{{ $question.id }}" id="q-{{ $question.id }}">
@@ -295,7 +294,7 @@
 
     async function PostSubmissionForEvaluation(payload) {
         console.log("Posting submission for evaluation:", payload);
-        const res = await fetch(`http://localhost:9876/api/academy/quiz/${payload.id}/submit`, {
+        const res = await fetch(`/api/academy/quiz/submit`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(payload)
@@ -377,8 +376,7 @@
 
     function  ConvertFormToPayload(form) {
         return {
-            id: form.querySelector("input[name='quiz_id']").value,
-            user_id: form.querySelector("input[name='user_id']").value,
+            quiz_abs_path: form.querySelector("input[name='quiz_abs_path']").value,
             answers: ParseFormAnswers(form)
         };
     }
