@@ -1,0 +1,10 @@
+{{- with .Params }}
+{
+  "id": "{{ .id }}",
+  "title": {{ .title | jsonify }},
+  "description": {{ $.Content | plainify | jsonify }},
+  "total_marks": {{ .total_marks }},
+  "passing_marks": {{ .passing_marks }},
+  "questions": {{ .questions | jsonify }}
+}
+{{- end }}
