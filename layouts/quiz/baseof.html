@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.Language.Lang }}" class="no-js">
+
+<head>
+    {{ partial "head.html" . }}
+</head>
+
+<body class="td-{{ .Kind }}{{ with .Page.Params.body_class }} {{ . }}{{ end }}">
+    <div class="td-main">
+        <main class="" role="main">
+            {{ block "main" . }}{{ end }}
+        </main>
+    </div>
+    {{ partial "scripts.html" . }}
+    {{ partial "image-modal.html" . }}
+</body>
+
+</html>
