@@ -423,6 +423,7 @@
 
     function ConvertFormToPayload(form) {
         return {
+            registration_id: window.academyContext?.RegistrationData?.id || null,
             quiz_abs_path: form.querySelector("input[name='quiz_abs_path']").value,
             answers: ParseFormAnswers(form)
         };
