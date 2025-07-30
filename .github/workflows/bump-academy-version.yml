@@ -31,8 +31,9 @@ jobs:
       - name: Update dependency in go.mod
         run: |
           cd dependent
-          go mod edit -require=github.com/layer5io/academy-theme@${{ github.event.release.tag_name }}
-          go mod tidy
+          make theme-update
+          # go mod edit -require=github.com/layer5io/academy-theme@${{ github.event.release.tag_name }}
+          # go mod tidy
 
       - name: Create Pull pull-requests
         uses: peter-evans/create-pull-request@v7
