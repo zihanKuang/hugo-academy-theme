@@ -30,7 +30,7 @@
 
       {
 
-        "id": {{ or $p.Params.Id  (md5 $p.Permalink) | jsonify }},
+        "id": {{ partial "id.html" $p }},
         "level": {{ or $level "beginner" | jsonify }},
         "slug": {{ or $p.Slug $p.File.ContentBaseName | jsonify }},
         "org_id": {{ $uuid | jsonify }},
@@ -60,7 +60,7 @@
                 {
                   "title": {{ $c.Title | jsonify }},
                   "slug": {{ or $c.Slug $c.File.ContentBaseName | jsonify }},
-                  "id": {{ or $c.Params.Id $c.Permalink | jsonify }},
+                  "id": {{ partial "id.html" $c }},
                   "level": {{ $c.Params.level | jsonify }},
                   "description": {{ $c.Description | jsonify }},
                   "weight": {{ $c.Params.Order | jsonify}},
