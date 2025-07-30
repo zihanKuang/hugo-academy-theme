@@ -1,0 +1,6 @@
+{{- $id := .Params.id -}}
+{{- if $id -}}
+  {{ $id | jsonify }}
+{{- else -}}
+  {{ .RelPermalink | md5 | jsonify }}
+{{- end -}}

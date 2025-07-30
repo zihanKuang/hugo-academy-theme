@@ -1,6 +1,6 @@
 {{ $p := .Params }}
 {
-  "id": {{ $p.id | jsonify }},
+  "id": {{ partial "id.html" . }},
   "title": {{ $p.title | jsonify }},
   "description": {{ .Content | plainify | jsonify }},
   "slug": {{ .Slug | jsonify }},
@@ -24,7 +24,7 @@
     {{ $total }},
   "parent": {{- with .Parent -}}
     {
-      "id": {{ .Params.id | default "unknown" | jsonify }},
+      "id": {{ partial "id.html" . }},
       "title": {{ .Title | jsonify }},
       "relPermalink": {{ .RelPermalink | jsonify }},
       "type": {{ .Type | jsonify }}

@@ -1,8 +1,7 @@
 ---
 title: '{{ replace .File.ContentBaseName `-` ` ` | title }}'
-id: "replace-with-unique-id"
 pass_percentage: 70 # Minimum percentage required to pass the quiz
-duration_minutes: 15 # Duration of the quiz in minutes
+time_limit: 15 # Duration of the quiz in minutes
 difficulty: "beginner" # Difficulty level of the quiz 
 category: "Programming Languages" # Category of the quiz
 tags: ["golang", "basics", "syntax", "fundamentals"] # Tags for the quiz, useful for search and categorization
