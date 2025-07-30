@@ -17,6 +17,13 @@ jobs:
           - layer5io/academy-build
           - layer5io/academy-example
     steps:
+
+      - name: Setup Hugo (Extended)
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.147.9'
+          extended: true
+          
       - name: Checkout academy-theme code 
         uses: actions/setup-go@v5
         with:
