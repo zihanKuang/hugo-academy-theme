@@ -146,12 +146,7 @@
     }
 
     .result {
-        background: var(--bs-light-bg-subtle);
-        border: var(--bs-border-width) solid var(--bs-border-color);
-        border-radius: var(--bs-border-radius);
-        padding: 1.75rem;
         margin-top: 2rem;
-        text-align: center;
     }
 
     .result h2 {
@@ -249,7 +244,7 @@
     </div>
 
     <div class="form-container">
-        <form id="quiz-form"  >
+        <form id="quiz-form">
             <input type="hidden" name="quiz_abs_path" value="{{ .RelPermalink }}">
 
             {{ range $index, $question := .Params.questions }}
@@ -271,7 +266,7 @@
                 </div>
                 {{ end }}
 
-                {{ else if  (eq $question.type "short_answer")  }}
+                {{ else if (eq $question.type "short_answer") }}
                 <input type="text" name="answer_text_{{ $question.id }}" class="text-input"
                     placeholder="Type your answer here">
                 {{ end }}
@@ -308,11 +303,63 @@
     function RenderSubmissionResult(data) {
         const resultEl = document.getElementById("result");
         resultEl.style.display = "block";
+
+        // Calculate metrics
+        const correctCount = data.correct_submissions ? Object.keys(data.correct_submissions).filter(key => data.correct_submissions[key]).length : 0;
+        const totalCount = document.querySelectorAll(".question").length;
+        const passStatus = data.passed ? 'passed' : 'failed';
+
+        const incorrectCount = totalCount - correctCount;
+
+        const passed = data.passed;
+        const statusText = passed ? 'Passed' : 'Failed';
+        const statusClass = passed ? 'text-success' : 'text-danger';
+        const bgClass = passed ? 'bg-success-subtle' : 'bg-danger-subtle';
+        const iconClass = passed ? 'fas fa-check-circle' : 'fas fa-times-circle';
+
         resultEl.innerHTML = `
-            <h2>Quiz Results</h2>
-            <div class="score-info"><strong>Score:</strong> ${data.score}</div>
-            <div class="score-info"><strong>Grade:</strong> ${data.grade}</div>
-        `;
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center mb-3 ${bgClass} rounded p-3">
+                    <i class="${iconClass} me-3 fs-3 ${statusClass}"></i>
+                    <div>
+                        <h4 class="mb-0 ${statusClass}">${statusText}</h4>
+                        <small class="text-muted">You ${passed ? "passed" : "did not pass"} the quiz</small>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 mb-4">
+                    <div class="flex-grow-1 p-3 bg-light rounded">
+                        <div class="text-muted small mb-1">Score</div>
+                        <div class="fw-bold fs-5">${data.score} / ${data.total_marks}</div>
+                    </div>
+                    <div class="flex-grow-1 p-3 bg-light rounded">
+                        <div class="text-muted small mb-1">Percentage</div>
+                        <div class="fw-bold fs-5">${Math.round(data.percentage_scored)}%</div>
+                    </div>
+                </div>
+
+                ${data.correct_submissions
+                ? `
+                    <div class="d-flex justify-content-around text-center">
+                        <div>
+                            <div class="fw-bold text-success">${correctCount}</div>
+                            <small class="text-muted">Correct</small>
+                        </div>
+                        <div>
+                            <div class="fw-bold text-danger">${incorrectCount}</div>
+                            <small class="text-muted">Incorrect</small>
+                        </div>
+                        <div>
+                            <div class="fw-bold text-secondary">${totalCount}</div>
+                            <small class="text-muted">Total</small>
+                        </div>
+                    </div>`
+                : ''
+            }
+            </div>
+        </div>`;
+
         document.querySelectorAll(".question").forEach((qEl) => {
             const qid = qEl.dataset.questionId;
             if (data.correct_submissions && data.correct_submissions[qid]) {
@@ -374,7 +421,7 @@
         return answers;
     }
 
-    function  ConvertFormToPayload(form) {
+    function ConvertFormToPayload(form) {
         return {
             quiz_abs_path: form.querySelector("input[name='quiz_abs_path']").value,
             answers: ParseFormAnswers(form)
@@ -384,6 +431,7 @@
     async function HandleQuizSubmission(e) {
         e.preventDefault();
         e.stopPropagation();
+
 
         // Prevent multiple submissions 
         if (document.getElementById("loading").style.display === "block") {
