@@ -1,10 +1,33 @@
-{{- with .Params }}
+{{ $p := .Params }}
 {
-  "id": "{{ .id }}",
-  "title": {{ .title | jsonify }},
-  "description": {{ $.Content | plainify | jsonify }},
-  "total_marks": {{ .total_marks }},
-  "passing_marks": {{ .passing_marks }},
-  "questions": {{ .questions | jsonify }}
+  "id": {{ $p.id | jsonify }},
+  "title": {{ $p.title | jsonify }},
+  "description": {{ .Content | plainify | jsonify }},
+  "slug": {{ .Slug | jsonify }},
+  "relPermalink": {{ .RelPermalink | jsonify }},
+  "permalink": {{ .Permalink | jsonify }},
+  "type": {{ .Type | jsonify }},
+  "section": {{ .Section | jsonify }},
+  "layout": {{ .Layout | jsonify }},
+  "date": {{ .Date | time.Format "2006-01-02" | jsonify }},
+  "lastmod": {{ .Lastmod | time.Format "2006-01-02" | jsonify }},
+  "draft": {{ .Draft | jsonify }},
+  "file_path": {{ .File.Path | jsonify }},
+  "pass_percentage": {{ or $p.pass_percentage 70 | jsonify }},
+  "time_limit": {{ or $p.time_limit "infinite" | jsonify }},
+  "questions": {{ $p.questions | jsonify }},
+  "total_questions": {{ len $p.questions }},
+  "total_marks": {{- $total := 0 -}}
+    {{- range $p.questions }}
+      {{- $total = add $total (or .marks 0) }}
+    {{- end }}
+    {{ $total }},
+  "parent": {{- with .Parent -}}
+    {
+      "id": {{ .Params.id | default "unknown" | jsonify }},
+      "title": {{ .Title | jsonify }},
+      "relPermalink": {{ .RelPermalink | jsonify }},
+      "type": {{ .Type | jsonify }}
+    }
+  {{- else -}} null {{- end }}
 }
-{{- end }}
